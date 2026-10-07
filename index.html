@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Мастер на выезд Ташкент</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Layout: липкая шапка с навигацией и переключателем RU/UZ. Тёмная герой-панель с формой заказа. Дальше полоса доверия, карточки услуг (кнопка заполняет форму), шаги, районы-кнопки, вопросы, финальный призыв. */
+:root {
+  --bg: #f1f2ee;
+  --panel: #ffffff;
+  --ink: #15191c;
+  --muted: #5b6469;
+  --line: #d9dcd5;
+  --accent: #ff5a14;
+  --accent-soft: #ffe6da;
+  --wa: #1fa855;
+  --wa-ink: #ffffff;
+  --soft: #e6e8e1;
+  --hero-bg: #12181c;
+  --hero-ink: #f1f3ee;
+  --hero-muted: #a9b2b7;
+  --hero-line: #2a343a;
+  --head-bg: rgba(241,242,238,0.92);
+  --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1315; --panel: #1a2125; --ink: #eef0ec; --muted: #9aa3a8;
+    --line: #2c353a; --accent: #ff6a2b; --accent-soft: #3a2218;
+    --wa: #2bc06a; --wa-ink: #06210f; --soft: #20282c;
+    --hero-bg: #161d21; --hero-line: #2c363c; --head-bg: rgba(15,19,21,0.92);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1315; --panel: #1a2125; --ink: #eef0ec; --muted: #9aa3a8;
+  --line: #2c353a; --accent: #ff6a2b; --accent-soft: #3a2218;
+  --wa: #2bc06a; --wa-ink: #06210f; --soft: #20282c;
+  --hero-bg: #161d21; --hero-line: #2c363c; --head-bg: rgba(15,19,21,0.92);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; padding-inline: 16px; padding-block: 0 96px; }
+.wrap { max-width: 1120px; margin-inline: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.4rem, 3.4vw, 2rem); }
+section { padding-block: 56px 0; }
+.label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+svg.i { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+.demo-bar { font-size: 13px; color: var(--muted); padding-block: 9px; text-align: center; background: var(--soft); margin-inline: -16px; padding-inline: 16px; }
+
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--head-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); margin-inline: -16px; padding-inline: 16px; }
+.top-in { max-width: 1120px; margin-inline: auto; display: flex; align-items: center; gap: 16px; padding-block: 12px; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 16px; text-decoration: none; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.brand-mark { width: 26px; height: 26px; border-radius: 7px; background: var(--accent); display: grid; place-items: center; color: #1a0b03; }
+.brand-mark svg { width: 16px; height: 16px; }
+nav.main { display: flex; gap: 22px; margin-left: 20px; font-size: 15px; font-weight: 500; }
+nav.main a { text-decoration: none; color: var(--muted); }
+nav.main a:hover { color: var(--ink); }
+.top-r { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.lang { display: inline-flex; border: 1.5px solid var(--line); border-radius: 9px; overflow: hidden; }
+.lang button { font: 600 13px var(--font-body); padding: 9px 11px; border: 0; background: transparent; color: var(--muted); cursor: pointer; min-height: 40px; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 16px/1 var(--font-body); padding: 15px 22px; border-radius: 10px; border: 0; text-decoration: none; cursor: pointer; min-height: 48px; }
+.btn svg { width: 20px; height: 20px; }
+.btn-wa { background: var(--wa); color: var(--wa-ink); }
+.btn-wa:hover { filter: brightness(1.07); }
+.btn-small { padding: 11px 16px; min-height: 44px; font-size: 15px; }
+
+.hero { background: var(--hero-bg); color: var(--hero-ink); border-radius: 22px; margin-top: 16px; padding: clamp(22px, 4vw, 44px); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: start; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: auto -40px -60px auto; width: 380px; height: 380px; border-radius: 50%; border: 1px solid var(--hero-line); box-shadow: 0 0 0 46px transparent, 0 0 0 47px var(--hero-line), 0 0 0 100px transparent, 0 0 0 101px var(--hero-line); pointer-events: none; opacity: .7; }
+.hero > * { min-width: 0; position: relative; }
+.hero .label { color: var(--hero-muted); display: flex; align-items: center; gap: 8px; }
+.hero .label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 0 4px rgba(43,192,106,.2); }
+.hero h1 { font-size: clamp(1.8rem, 4.8vw, 3rem); margin-top: 14px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lead { font-size: 18px; color: var(--hero-muted); max-width: 50ch; margin: 18px 0 24px; }
+.stats { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 8px 34px; margin: 30px 0 0; padding-top: 22px; border-top: 1px solid var(--hero-line); }
+.stat b { display: block; font: 700 clamp(1.1rem, 3vw, 1.5rem)/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--hero-muted); }
+
+.order { background: var(--panel); color: var(--ink); border-radius: 16px; padding: 22px; display: grid; gap: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+.order h2 { font-size: 1.15rem; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-size: 13px; font-weight: 600; color: var(--muted); }
+.field select, .field input { font: 500 16px var(--font-body); padding: 12px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); width: 100%; min-height: 48px; }
+.field select:focus, .field input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+.order .btn { width: 100%; }
+.order small { color: var(--muted); font-size: 13px; }
+.order.flash { animation: flash .9s ease; }
+@keyframes flash { 0% { box-shadow: 0 0 0 0 var(--accent); } 40% { box-shadow: 0 0 0 7px var(--accent); } 100% { box-shadow: 0 18px 50px rgba(0,0,0,.35); } }
+
+.trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
+.trust > div { display: flex; gap: 12px; padding: 18px; align-items: flex-start; min-width: 0; border-left: 1px solid var(--line); }
+.trust > div:first-child { border-left: 0; }
+.trust svg { color: var(--accent); margin-top: 2px; }
+.trust b { display: block; font-size: 15px; font-weight: 600; }
+.trust span { font-size: 13px; color: var(--muted); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 14px; margin-top: 22px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; transition: border-color .15s ease, transform .15s ease; }
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card .ic { width: 46px; height: 46px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+.card h3 { font-family: var(--font-body); font-weight: 600; font-size: 18px; letter-spacing: 0; }
+.card p { margin: 0; font-size: 14px; color: var(--muted); flex: 1; }
+.card .foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 6px; }
+.price { font: 700 18px/1.15 var(--font-display); font-variant-numeric: tabular-nums; }
+.price small { display: block; font: 400 12px var(--font-body); color: var(--muted); margin-top: 3px; }
+.card .pick { font: 600 14px var(--font-body); border: 1.5px solid var(--ink); background: transparent; color: var(--ink); border-radius: 9px; padding: 10px 13px; cursor: pointer; min-height: 42px; white-space: nowrap; }
+.card .pick:hover { background: var(--ink); color: var(--bg); }
+.note { font-size: 13px; color: var(--muted); margin: 14px 2px 0; }
+
+.steps { counter-reset: s; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0 0; padding: 0; list-style: none; position: relative; }
+.steps li { background: var(--soft); border-radius: 16px; padding: 20px; min-width: 0; counter-increment: s; }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 700 14px var(--font-display); margin-bottom: 14px; }
+.steps h3 { font-family: var(--font-body); font-size: 18px; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+.steps p { margin: 0; font-size: 14px; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+.chips button { font: 500 15px var(--font-body); padding: 10px 16px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); cursor: pointer; min-height: 44px; }
+.chips button:hover { border-color: var(--accent); }
+.chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #1a0b03; font-weight: 600; }
+.cars { font-size: 15px; color: var(--muted); margin: 16px 0 0; max-width: 70ch; }
+
+details { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 0 20px; margin-top: 10px; }
+summary { cursor: pointer; font-weight: 600; padding: 18px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--accent); }
+details[open] summary::after { content: "–"; }
+summary::-webkit-details-marker { display: none; }
+details p { margin: 0 0 18px; color: var(--muted); max-width: 70ch; }
+
+.cta { margin-top: 56px; background: var(--hero-bg); color: var(--hero-ink); border-radius: 22px; padding: clamp(24px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.cta h2 { font-size: clamp(1.3rem, 3.4vw, 1.9rem); max-width: 22ch; }
+.num { font-variant-numeric: tabular-nums; font-size: 16px; color: var(--hero-muted); margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.copy { font: 600 13px var(--font-body); background: transparent; color: var(--hero-ink); border: 1.5px solid var(--hero-line); border-radius: 8px; padding: 7px 11px; cursor: pointer; }
+
+footer { padding-block: 28px 0; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+.fab { position: fixed; left: 16px; right: 16px; bottom: 0; padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: none; z-index: 15; }
+.fab .btn { width: 100%; box-shadow: 0 8px 26px rgba(0,0,0,.32); }
+
+@media (max-width: 900px) {
+  nav.main { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .trust { grid-template-columns: repeat(2, 1fr); }
+  .trust > div:nth-child(3) { border-left: 0; }
+  .trust > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .steps { grid-template-columns: 1fr; }
+  .fab { display: block; }
+  .top-r .btn { display: none; }
+  .top-r { margin-left: auto; }
+}
+@media (max-width: 520px) {
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 8px 14px; }
+  .brand span.t { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card, .btn { transition: none; }
+  .order.flash { animation: none; }
+}
+</style>
+
+<div class="wrap">
+  <div class="demo-bar" data-i18n="demo">Демо-версия. Название, телефон и цены — пример, заменим на ваши.</div>
+</div>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" style="stroke-width:2.4"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.5 2.5-2.2-.5-.5-2.2z"/></svg></span><span class="t">Мастер на выезд</span></a>
+    <nav class="main" aria-label="Разделы">
+      <a href="#services" data-i18n="nav1">Услуги</a>
+      <a href="#how" data-i18n="nav2">Как работаем</a>
+      <a href="#area" data-i18n="nav3">Районы</a>
+      <a href="#faq" data-i18n="nav4">Вопросы</a>
+    </nav>
+    <div class="top-r">
+      <div class="lang" role="group" aria-label="Язык / Til">
+        <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="uz" aria-pressed="false">UZ</button>
+      </div>
+      <a class="btn btn-wa btn-small" data-wa target="_blank" rel="noopener" href="https://wa.me/998900000000"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg><span data-i18n="callwa">Вызвать в WhatsApp</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <main>
+    <div class="hero">
+      <div>
+        <p class="label" data-i18n="eyebrow">Выездной автосервис · Ташкент</p>
+        <h1><span data-i18n="h1a">Мастер приедет к вашей машине.</span> <em data-i18n="h1b">Во двор, к офису, на обочину.</em></h1>
+        <p class="lead" data-i18n="lead">Масло, аккумулятор, колесо, диагностика. Опишите проблему в WhatsApp, назовём цену до выезда и скажем, во сколько будем.</p>
+        <a class="btn btn-wa" data-wa target="_blank" rel="noopener" href="https://wa.me/998900000000"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg><span data-i18n="writemaster">Написать мастеру</span></a>
+        <div class="stats">
+          <div class="stat"><b>~60</b><span data-i18n="st1">минут до приезда</span></div>
+          <div class="stat"><b>8–22</b><span data-i18n="st2">ежедневно</span></div>
+          <div class="stat"><b>100%</b><span data-i18n="st3">цена до работ</span></div>
+        </div>
+      </div>
+
+      <form class="order" id="order" aria-labelledby="order-title">
+        <h2 id="order-title" data-i18n="ordertitle">Вызвать мастера</h2>
+        <div class="field"><label for="f-service" data-i18n="f1">Что случилось</label><select id="f-service"></select></div>
+        <div class="field"><label for="f-car" data-i18n="f2">Машина</label><input id="f-car" type="text" autocomplete="off" data-ph="carph"></div>
+        <div class="field"><label for="f-district" data-i18n="f3">Район</label><select id="f-district"></select></div>
+        <a class="btn btn-wa" id="order-link" target="_blank" rel="noopener" href="https://wa.me/998900000000"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg><span data-i18n="send">Отправить в WhatsApp</span></a>
+        <small data-i18n="sendhint">Откроется чат с готовым сообщением. Останется нажать «Отправить».</small>
+      </form>
+    </div>
+
+    <div class="trust">
+      <div><svg class="i" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg><p style="margin:0"><b data-i18n="t1h">Цена до начала</b><span data-i18n="t1p">Называем стоимость работы в чате</span></p></div>
+      <div><svg class="i" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><p style="margin:0"><b data-i18n="t2h">Гарантия на работу</b><span data-i18n="t2p">Срок зададим по вашим условиям</span></p></div>
+      <div><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><p style="margin:0"><b data-i18n="t3h">Быстрый выезд</b><span data-i18n="t3p">В пределах Ташкента</span></p></div>
+      <div><svg class="i" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><p style="margin:0"><b data-i18n="t4h">Работаем на месте</b><span data-i18n="t4p">Двор, парковка, обочина</span></p></div>
+    </div>
+
+    <section id="services">
+      <p class="label" data-i18n="s_label">Услуги и цены</p>
+      <h2 data-i18n="s_h">Выберите услугу, мы заполним заявку</h2>
+      <div class="cards" id="cards"></div>
+      <p class="note" data-i18n="s_note">Цены — пример для демо. Запчасти оплачиваются отдельно, итог мастер называет до начала работ.</p>
+    </section>
+
+    <section id="how">
+      <p class="label" data-i18n="h_label">Как это работает</p>
+      <h2 data-i18n="h_h">Три шага до ремонта</h2>
+      <ol class="steps">
+        <li><h3 data-i18n="p1h">Пишете в WhatsApp</h3><p data-i18n="p1p">Район, марка машины, что случилось. Можно приложить фото или видео звука.</p></li>
+        <li><h3 data-i18n="p2h">Получаете цену и время</h3><p data-i18n="p2p">Мастер называет стоимость работы и во сколько будет на месте.</p></li>
+        <li><h3 data-i18n="p3h">Мастер делает на месте</h3><p data-i18n="p3p">Оплата после работы. Что заменили, покажем.</p></li>
+      </ol>
+    </section>
+
+    <section id="area">
+      <p class="label" data-i18n="a_label">Где работаем</p>
+      <h2 data-i18n="a_h">Районы Ташкента</h2>
+      <ul class="chips" id="chips"></ul>
+      <p class="cars" data-i18n="cars">Чаще всего приезжаем к Chevrolet Cobalt, Gentra, Nexia, Lacetti, Spark, Damas, Onix и Tracker. Если вашей машины нет в списке, напишите, посмотрим.</p>
+    </section>
+
+    <section id="faq">
+      <p class="label" data-i18n="q_label">Вопросы</p>
+      <h2 data-i18n="q_h">Что обычно спрашивают</h2>
+      <details><summary data-i18n="q1">Как быстро приедет мастер?</summary><p data-i18n="a1">Обычно в течение часа после подтверждения заявки, если вы в пределах города. Точное время мастер напишет в ответ.</p></details>
+      <details><summary data-i18n="q2">Что, если на месте не получится починить?</summary><p data-i18n="a2">Заплатите только за выезд и диагностику. Дальше предложим эвакуатор или ремонт в сервисе, решение за вами.</p></details>
+      <details><summary data-i18n="q3">Можно ли использовать свои запчасти?</summary><p data-i18n="a3">Да. Работу выполним с вашими деталями, но гарантия действует только на саму работу.</p></details>
+      <details><summary data-i18n="q4">Как платить?</summary><p data-i18n="a4">Наличными или переводом на карту после того, как работа выполнена и вы проверили результат.</p></details>
+    </section>
+
+    <div class="cta">
+      <div>
+        <h2 data-i18n="cta">Машина встала? Напишите, поможем.</h2>
+        <div class="num"><span id="phone-text">+998 90 000 00 00</span><button class="copy" type="button" id="copy-btn" data-i18n="copy">Скопировать</button></div>
+      </div>
+      <a class="btn btn-wa" data-wa target="_blank" rel="noopener" href="https://wa.me/998900000000"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg><span data-i18n="callwa">Вызвать в WhatsApp</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <span>© Мастер на выезд, Ташкент</span>
+    <span data-i18n="foot">Демо-страница. Контакты и цены заполняются по данным владельца.</span>
+  </footer>
+</div>
+
+<div class="fab"><a class="btn btn-wa" data-wa target="_blank" rel="noopener" href="https://wa.me/998900000000"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg><span data-i18n="fab">Вызвать мастера в WhatsApp</span></a></div>
+
+<script>
+(function () {
+  var PHONE = "998900000000"; // заменить на реальный номер
+  var base = "https://wa.me/" + PHONE;
+  var lang = "ru";
+  try { var saved = localStorage.getItem("lang"); if (saved === "uz" || saved === "ru") lang = saved; } catch (e) {}
+
+  var T = {
+    ru: {
+      demo: "Демо-версия. Название, телефон и цены — пример, заменим на ваши.",
+      nav1: "Услуги", nav2: "Как работаем", nav3: "Районы", nav4: "Вопросы",
+      callwa: "Вызвать в WhatsApp", writemaster: "Написать мастеру", fab: "Вызвать мастера в WhatsApp",
+      eyebrow: "Выездной автосервис · Ташкент",
+      h1a: "Мастер приедет к вашей машине.", h1b: "Во двор, к офису, на обочину.",
+      lead: "Масло, аккумулятор, колесо, диагностика. Опишите проблему в WhatsApp, назовём цену до выезда и скажем, во сколько будем.",
+      st1: "минут до приезда", st2: "ежедневно", st3: "цена до работ",
+      ordertitle: "Вызвать мастера", f1: "Что случилось", f2: "Машина", f3: "Район", carph: "Например, Cobalt 2019",
+      send: "Отправить в WhatsApp", sendhint: "Откроется чат с готовым сообщением. Останется нажать «Отправить».",
+      t1h: "Цена до начала", t1p: "Называем стоимость работы в чате",
+      t2h: "Гарантия на работу", t2p: "Срок зададим по вашим условиям",
+      t3h: "Быстрый выезд", t3p: "В пределах Ташкента",
+      t4h: "Работаем на месте", t4p: "Двор, парковка, обочина",
+      s_label: "Услуги и цены", s_h: "Выберите услугу, мы заполним заявку",
+      s_note: "Цены — пример для демо. Запчасти оплачиваются отдельно, итог мастер называет до начала работ.",
+      order: "Заказать",
+      h_label: "Как это работает", h_h: "Три шага до ремонта",
+      p1h: "Пишете в WhatsApp", p1p: "Район, марка машины, что случилось. Можно приложить фото или видео звука.",
+      p2h: "Получаете цену и время", p2p: "Мастер называет стоимость работы и во сколько будет на месте.",
+      p3h: "Мастер делает на месте", p3p: "Оплата после работы. Что заменили, покажем.",
+      a_label: "Где работаем", a_h: "Районы Ташкента",
+      cars: "Чаще всего приезжаем к Chevrolet Cobalt, Gentra, Nexia, Lacetti, Spark, Damas, Onix и Tracker. Если вашей машины нет в списке, напишите, посмотрим.",
+      q_label: "Вопросы", q_h: "Что обычно спрашивают",
+      q1: "Как быстро приедет мастер?", a1: "Обычно в течение часа после подтверждения заявки, если вы в пределах города. Точное время мастер напишет в ответ.",
+      q2: "Что, если на месте не получится починить?", a2: "Заплатите только за выезд и диагностику. Дальше предложим эвакуатор или ремонт в сервисе, решение за вами.",
+      q3: "Можно ли использовать свои запчасти?", a3: "Да. Работу выполним с вашими деталями, но гарантия действует только на саму работу.",
+      q4: "Как платить?", a4: "Наличными или переводом на карту после того, как работа выполнена и вы проверили результат.",
+      cta: "Машина встала? Напишите, поможем.", copy: "Скопировать", copied: "Скопировано", selected: "Выделено",
+      foot: "Демо-страница. Контакты и цены заполняются по данным владельца.",
+      from: "от ", unit: "сум", unitwork: "сум, работа",
+      msg: "Здравствуйте! Нужен выездной мастер.", msgP: "Проблема: ", msgC: "Машина: ", msgD: "Район: ", nocar: "не указана"
+    },
+    uz: {
+      demo: "Demo-versiya. Nomi, telefon va narxlar namuna, sizning ma'lumotlaringizga almashtiramiz.",
+      nav1: "Xizmatlar", nav2: "Qanday ishlaymiz", nav3: "Tumanlar", nav4: "Savollar",
+      callwa: "WhatsApp'da chaqirish", writemaster: "Ustaga yozish", fab: "WhatsApp'da usta chaqirish",
+      eyebrow: "Chiquvchi avtoservis · Toshkent",
+      h1a: "Usta mashinangiz oldiga o'zi keladi.", h1b: "Hovliga, ofisga, yo'l chetiga.",
+      lead: "Moy, akkumulyator, g'ildirak, diagnostika. Muammoni WhatsApp'da yozing, chiqishdan oldin narxni aytamiz va qachon yetib borishimizni bildiramiz.",
+      st1: "daqiqada yetib boramiz", st2: "har kuni", st3: "narx ishdan oldin",
+      ordertitle: "Usta chaqirish", f1: "Nima bo'ldi", f2: "Mashina", f3: "Tuman", carph: "Masalan, Cobalt 2019",
+      send: "WhatsApp'ga yuborish", sendhint: "Tayyor xabar bilan chat ochiladi. Faqat «Yuborish» tugmasini bosasiz.",
+      t1h: "Narx oldindan", t1p: "Ish narxini chatda aytamiz",
+      t2h: "Ishga kafolat", t2p: "Muddatni siz bilan kelishamiz",
+      t3h: "Tez yetib boramiz", t3p: "Toshkent ichida",
+      t4h: "Joyida ishlaymiz", t4p: "Hovli, to'xtash joyi, yo'l chetida",
+      s_label: "Xizmatlar va narxlar", s_h: "Xizmatni tanlang, arizani o'zimiz to'ldiramiz",
+      s_note: "Narxlar demo uchun namuna. Ehtiyot qismlar alohida to'lanadi, yakuniy summani usta ishdan oldin aytadi.",
+      order: "Buyurtma",
+      h_label: "Qanday ishlaydi", h_h: "Ta'mirgacha uch qadam",
+      p1h: "WhatsApp'da yozasiz", p1p: "Tuman, mashina rusumi, nima bo'lgani. Rasm yoki tovush videosini ilova qilish mumkin.",
+      p2h: "Narx va vaqtni olasiz", p2p: "Usta ish narxini va qachon yetib kelishini aytadi.",
+      p3h: "Usta joyida ishlaydi", p3p: "To'lov ishdan keyin. Nimani almashtirganimizni ko'rsatamiz.",
+      a_label: "Qayerda ishlaymiz", a_h: "Toshkent tumanlari",
+      cars: "Ko'pincha Chevrolet Cobalt, Gentra, Nexia, Lacetti, Spark, Damas, Onix va Tracker mashinalariga boramiz. Mashinangiz ro'yxatda bo'lmasa ham yozing, ko'ramiz.",
+      q_label: "Savollar", q_h: "Odatda nimani so'rashadi",
+      q1: "Usta qancha vaqtda yetib keladi?", a1: "Odatda ariza tasdiqlangandan keyin bir soat ichida, agar shahar ichida bo'lsangiz. Aniq vaqtni usta javobda yozadi.",
+      q2: "Joyida ta'mirlab bo'lmasa-chi?", a2: "Faqat chiqish va diagnostika uchun to'laysiz. Keyin evakuator yoki servisda ta'mirlashni taklif qilamiz, qaror sizniki.",
+      q3: "O'z ehtiyot qismlarimdan foydalansam bo'ladimi?", a3: "Ha. Ishni sizning qismlaringiz bilan bajaramiz, lekin kafolat faqat ishning o'ziga amal qiladi.",
+      q4: "Qanday to'lanadi?", a4: "Ish bajarilib, natijani tekshirganingizdan keyin naqd yoki kartaga o'tkazma bilan.",
+      cta: "Mashina to'xtab qoldimi? Yozing, yordam beramiz.", copy: "Nusxalash", copied: "Nusxalandi", selected: "Belgilandi",
+      foot: "Demo-sahifa. Aloqa ma'lumotlari va narxlar egasining ma'lumotlari bo'yicha to'ldiriladi.",
+      from: "", unit: "so'm", unitwork: "so'm, ish haqi",
+      msg: "Assalomu alaykum! Chiquvchi usta kerak.", msgP: "Muammo: ", msgC: "Mashina: ", msgD: "Tuman: ", nocar: "ko'rsatilmagan"
+    }
+  };
+
+  var I = {
+    start: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+    battery: '<rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2M7 12h4M9 10v4"/>',
+    oil: '<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/>',
+    wheel: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/>',
+    obd: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M7 11l2 2 3-4 2 3 3-2"/>',
+    brake: '<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/>',
+    tow: '<path d="M3 16V9h9l3 4h4v3M3 16h3M10 16h5M19 16h2"/><circle cx="8" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',
+    wrench: '<path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.5 2.5-2.2-.5-.5-2.2z"/>'
+  };
+
+  var S = [
+    { id: "diag", ic: "wrench", p: "50 000", ru: ["Выезд и диагностика", "Осмотр на месте, причина поломки, прогноз по стоимости ремонта", "Не знаю, что сломалось"], uz: ["Chiqish va diagnostika", "Joyida ko'rik, nosozlik sababi, ta'mir narxi bo'yicha prognoz", "Nima buzilganini bilmayman"] },
+    { id: "start", ic: "start", p: "60 000", ru: ["Запуск двигателя", "Прикурим или заведём от пускового устройства", "Не заводится"], uz: ["Dvigatelni yurgizish", "Boshqa mashinadan yoki ishga tushirish qurilmasidan yurgizamiz", "Yurmayapti"] },
+    { id: "battery", ic: "battery", p: "40 000", w: 1, ru: ["Замена аккумулятора", "Снимем старый, поставим новый, проверим зарядку от генератора", "Села батарея"], uz: ["Akkumulyator almashtirish", "Eskisini olamiz, yangisini o'rnatamiz, generator zaryadini tekshiramiz", "Akkumulyator o'tirib qoldi"] },
+    { id: "oil", ic: "oil", p: "80 000", f: 1, w: 1, ru: ["Замена масла и фильтров", "Масло и фильтр можно купить у нас или взять свои", "Нужна замена масла"], uz: ["Moy va filtr almashtirish", "Moy va filtrni bizdan olish yoki o'zingiznikini berish mumkin", "Moy almashtirish kerak"] },
+    { id: "wheel", ic: "wheel", p: "70 000", f: 1, w: 1, ru: ["Колесо: замена и ремонт", "Запаска, прокол, подкачка, при необходимости балансировка", "Прокол или замена колеса"], uz: ["G'ildirak: almashtirish va ta'mir", "Zaxira g'ildirak, teshilish, shamol berish, kerak bo'lsa balans", "G'ildirak teshildi yoki almashtirish"] },
+    { id: "obd", ic: "obd", p: "100 000", ru: ["Компьютерная диагностика", "Считаем ошибки, объясним, что с машиной и насколько это срочно", "Горит ошибка на панели"], uz: ["Kompyuter diagnostikasi", "Xatolarni o'qiymiz, mashinada nima borligini va qanchalik shoshilinchligini tushuntiramiz", "Panelda xato yonib turibdi"] },
+    { id: "brake", ic: "brake", p: "120 000", f: 1, w: 1, ru: ["Замена тормозных колодок", "Передняя или задняя ось, с проверкой дисков", "Стук или скрип при торможении"], uz: ["Tormoz kolodkalarini almashtirish", "Old yoki orqa o'q, disklarni tekshirish bilan", "Tormozlashda taqillash yoki g'ichirlash"] },
+    { id: "tow", ic: "tow", ask: 1, ru: ["Эвакуатор", "Если на месте не починить, отвезём в сервис", "Нужен эвакуатор"], uz: ["Evakuator", "Joyida ta'mirlab bo'lmasa, servisga olib boramiz", "Evakuator kerak"] }
+  ];
+  var D = [
+    ["Чиланзар", "Chilonzor"], ["Юнусабад", "Yunusobod"], ["Мирзо-Улугбек", "Mirzo Ulug'bek"], ["Сергели", "Sergeli"],
+    ["Яшнабад", "Yashnobod"], ["Шайхантахур", "Shayxontohur"], ["Учтепа", "Uchtepa"], ["Мирабад", "Mirobod"],
+    ["Яккасарай", "Yakkasaroy"], ["Алмазар", "Olmazor"], ["Бектемир", "Bektemir"]
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var selService = $("f-service"), selDistrict = $("f-district"), car = $("f-car"), link = $("order-link");
+  var cards = $("cards"), chips = $("chips");
+  var chosenDistrict = 0;
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function priceHTML(s) {
+    var t = T[lang];
+    if (s.ask) return lang === "ru" ? "по запросу<small>зависит от района</small>" : "so'rov bo'yicha<small>tumanga qarab</small>";
+    var v = lang === "ru" ? (s.f ? "от " : "") + s.p : s.p + (s.f ? " dan" : "");
+    return v + "<small>" + (s.w ? t.unitwork : t.unit) + "</small>";
+  }
+
+  function render() {
+    var t = T[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.getAttribute("data-i18n"); if (t[k] != null) el.textContent = t[k]; });
+    document.querySelectorAll("[data-ph]").forEach(function (el) { el.placeholder = t[el.getAttribute("data-ph")]; });
+    document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+
+    var cur = selService.value || "start";
+    selService.innerHTML = "";
+    S.forEach(function (s) { var o = document.createElement("option"); o.value = s.id; o.textContent = s[lang][2]; selService.appendChild(o); });
+    selService.value = cur;
+
+    selDistrict.innerHTML = "";
+    D.forEach(function (d, i) { var o = document.createElement("option"); o.value = i; o.textContent = d[lang === "ru" ? 0 : 1]; selDistrict.appendChild(o); });
+    selDistrict.value = chosenDistrict;
+
+    cards.innerHTML = "";
+    S.forEach(function (s) {
+      var c = document.createElement("article");
+      c.className = "card";
+      c.innerHTML = '<div class="ic"><svg class="i" viewBox="0 0 24 24">' + I[s.ic] + '</svg></div><h3></h3><p></p><div class="foot"><div class="price">' + priceHTML(s) + '</div><button type="button" class="pick"></button></div>';
+      c.querySelector("h3").textContent = s[lang][0];
+      c.querySelector("p").textContent = s[lang][1];
+      var b = c.querySelector(".pick");
+      b.textContent = t.order;
+      b.addEventListener("click", function () { selService.value = s.id; build(); focusOrder(); });
+      cards.appendChild(c);
+    });
+
+    chips.innerHTML = "";
+    D.forEach(function (d, i) {
+      var li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.textContent = d[lang === "ru" ? 0 : 1];
+      b.setAttribute("aria-pressed", i === chosenDistrict ? "true" : "false");
+      b.addEventListener("click", function () { chosenDistrict = i; selDistrict.value = i; markChips(); build(); focusOrder(); });
+      li.appendChild(b); chips.appendChild(li);
+    });
+    build();
+  }
+
+  function markChips() {
+    chips.querySelectorAll("button").forEach(function (b, i) { b.setAttribute("aria-pressed", i === chosenDistrict ? "true" : "false"); });
+  }
+  function focusOrder() {
+    var f = $("order");
+    f.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    f.classList.remove("flash"); void f.offsetWidth; f.classList.add("flash");
+  }
+  function build() {
+    var t = T[lang], s = S.filter(function (x) { return x.id === selService.value; })[0] || S[0];
+    var text = t.msg + "\n" + t.msgP + s[lang][2] + "\n" + t.msgC + (car.value.trim() || t.nocar) + "\n" + t.msgD + D[chosenDistrict][lang === "ru" ? 0 : 1];
+    link.href = base + "?text=" + encodeURIComponent(text);
+    var short = base + "?text=" + encodeURIComponent(t.msg);
+    document.querySelectorAll("a[data-wa]").forEach(function (a) { a.href = short; });
+  }
+
+  selService.addEventListener("input", build);
+  car.addEventListener("input", build);
+  selDistrict.addEventListener("input", function () { chosenDistrict = +selDistrict.value; markChips(); build(); });
+  $("order").addEventListener("submit", function (e) { e.preventDefault(); });
+  document.querySelectorAll("[data-lang]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      lang = b.getAttribute("data-lang");
+      try { localStorage.setItem("lang", lang); } catch (e) {}
+      render();
+    });
+  });
+
+  var btn = $("copy-btn"), phone = $("phone-text");
+  btn.addEventListener("click", function () {
+    function done() { btn.textContent = T[lang].copied; setTimeout(function () { btn.textContent = T[lang].copy; }, 1600); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(phone);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = T[lang].selected;
+    }
+    try { navigator.clipboard.writeText(phone.textContent).then(done, fallback); } catch (err) { fallback(); }
+  });
+
+  selService.value = "start";
+  render();
+})();
+</script>
+
+</body>
+
+</html>
